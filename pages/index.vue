@@ -27,7 +27,8 @@ export default {
   text-align: center;
 }
 .gacha-main {
-  background-image: url("./../assets/images/main_white.png");
-  background-size: cover;
+  /* background-image: url("./../assets/images/main_white.png");
+  background-size: cover; */
+  background-color: #edc039;
 }
 </style>

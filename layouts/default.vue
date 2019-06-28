@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header text-center">
-      <h1>鳥貴族注文ガチャ</h1>
+      <h1>鳥貴族 注文ガチャ</h1>
     </div>
     <nuxt/>
   </div>
@@ -57,8 +57,11 @@ html {
 }
 
 div.header {
-  background-color: #edc039;
   color: #ae1e24;
+  padding: 1.5em 0;
+  background-image: url("./../assets/images/main1.png");
+  background-position: center;
+  background-size: cover;
   h1 {
     font-weight: 600;
     margin-bottom: 0;
