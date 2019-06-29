@@ -1,3 +1,3 @@
 module.exports = {
-    apiBaseUrl: 'https://ak-toriki-backend-stg.herokuapp.com'
+    apiBaseUrl: 'https://ak-toriki-backend-stg.herokuapp.com/'
 }
