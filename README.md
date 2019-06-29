@@ -1,6 +1,11 @@
 # toriki-nuxt-frontend
-
-> My kryptonian Nuxt.js project
+鳥貴族 注文ガチャのフロントエンドプロジェクト  
+  
+*production*  
+https://ak-toriki-nuxt-frontend.herokuapp.com/  
+  
+*staging*  
+https://ak-toriki-nuxt-frontend-stg.herokuapp.com/
 
 ## Build Setup
 
