@@ -57,5 +57,12 @@ module.exports = {
      */
     extend(config, ctx) {}
   },
-  env: envSet
+  env: envSet,
+  axios:{
+    proxy:true,
+
+  },
+  proxy:{
+    
+  }
 }
