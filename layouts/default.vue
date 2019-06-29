@@ -1,13 +1,16 @@
 <template>
   <div>
-    <nuxt />
+    <div class="header text-center">
+      <h1>鳥貴族 注文ガチャ</h1>
+    </div>
+    <nuxt/>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -51,5 +54,17 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+div.header {
+  color: #ae1e24;
+  padding: 1.5em 0;
+  background-image: url("./../assets/images/main1.png");
+  background-position: center;
+  background-size: cover;
+  h1 {
+    font-weight: 600;
+    margin-bottom: 0;
+  }
 }
 </style>
