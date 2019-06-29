@@ -65,7 +65,7 @@ library.add(faSpinner);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
-const API_URL = "http://localhost:5000/";
+const API_BASE_URL = process.env.apiBaseUrl;
 
 export default {
   name: "gacha",
@@ -84,7 +84,7 @@ export default {
   methods: {
     turnGacha: function(event) {
       axios
-        .post(API_URL + "turn_gacha", {
+        .post(API_BASE_URL + "turn_gacha", {
           numOfFood: this.numOfFood,
           numOfDrink: this.numOfDrink
         })
