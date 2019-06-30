@@ -6,12 +6,12 @@
           <b-form-group>
             <div class="col-12">
               <span>食べもの：</span>
-              <input type="number" v-model="numOfFood">
+              <input type="number" v-model="numOfFood" />
               <span>個</span>
             </div>
             <div class="col-12">
               <span>飲みもの：</span>
-              <input type="number" v-model="numOfDrink">
+              <input type="number" v-model="numOfDrink" />
               <span>個</span>
             </div>
           </b-form-group>
@@ -28,7 +28,10 @@
         </transition>
       </div>
     </div>
-    <div class="gacha-result" v-if="foodList.length>0 || drinkList.length>0">
+    <div v-if="isLoading() && isShowLoading">
+      <loading />
+    </div>
+    <div class="gacha-result" v-if="!isLoading()">
       <div class="row">
         <div class="col-12">
           <h2>食べもの</h2>
@@ -36,7 +39,7 @@
         <div class="col-xs-12 col-md-9 offset-md-3 text-left menu-list">
           <ul>
             <li v-for="food in foodList" :key="food.id">
-              <fa-icon icon="spinner" class="fa-3x fa-pulse"/>
+              <fa-icon icon="spinner" class="fa-3x fa-pulse" />
               {{food.name}}
             </li>
           </ul>
@@ -56,26 +59,35 @@
 
 <script>
 import Vue from "vue";
+import Loading from "~/components/Loading.vue";
 import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
-library.add(faSpinner);
-
-Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 const API_BASE_URL = process.env.apiBaseUrl;
 
 export default {
   name: "gacha",
+  components: {
+    Loading
+  },
   data() {
     return {
       numOfFood: 1,
       numOfDrink: 1,
       foodList: [],
       drinkList: [],
-      isShow: false
+      //ボタンを表示するか
+      isShow: false,
+      isShowLoading: false,
+      // ロード中か
+      isLoading() {
+        return !(this.foodList.length > 0 || this.drinkList.length > 0);
+      },
+      // メニューリスト初期化
+      initialize() {
+        this.foodList = [];
+        this.drinkList = [];
+      }
     };
   },
   mounted() {
@@ -83,12 +95,15 @@ export default {
   },
   methods: {
     turnGacha: function(event) {
+      this.initialize();
+      this.isShowLoading = true;
       axios
         .post(API_BASE_URL + "turn_gacha", {
           numOfFood: this.numOfFood,
           numOfDrink: this.numOfDrink
         })
         .then(res => {
+          this.isShowLoading = false;
           this.foodList = res.data.foodList;
           this.drinkList = res.data.drinkList;
         });
@@ -132,13 +147,14 @@ div.gacha-container {
 }
 
 div.gacha-result {
+  font-weight: 600;
   h2 {
     padding: 0.5em 0;
   }
   div.menu-list {
     li {
-      font-size: 1.5rem;
-      padding: 0.1em 0;
+      font-size: 1.4rem;
+      padding: 0.3em 0;
     }
   }
 }
