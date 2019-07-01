@@ -31,29 +31,31 @@
     <div v-if="isLoading() && isShowLoading">
       <loading />
     </div>
-    <div class="gacha-result" v-if="!isLoading()">
-      <div class="row">
-        <div class="col-12">
-          <h2>食べもの</h2>
-        </div>
-        <div class="col-xs-12 col-md-9 offset-md-3 text-left menu-list">
-          <ul>
-            <li v-for="food in foodList" :key="food.id">
-              <fa-icon icon="spinner" class="fa-3x fa-pulse" />
-              {{food.name}}
-            </li>
-          </ul>
-        </div>
-        <div class="col-12">
-          <h2>飲みもの</h2>
-        </div>
-        <div class="col-xs-12 col-md-9 offset-md-3 text-left menu-list">
-          <ul>
-            <li v-for="drink in drinkList" :key="drink.id">{{drink.name}}</li>
-          </ul>
+    <transition name="fade">
+      <div id="gacha-result" class="gacha-result" v-if="!isLoading()">
+        <div class="row">
+          <div class="col-12">
+            <h2>食べもの</h2>
+          </div>
+          <div class="col-xs-12 col-md-9 offset-md-3 text-left menu-list">
+            <ul>
+              <li v-for="food in foodList" :key="food.id">
+                <fa-icon icon="spinner" class="fa-3x fa-pulse" />
+                {{food.name}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-12">
+            <h2>飲みもの</h2>
+          </div>
+          <div class="col-xs-12 col-md-9 offset-md-3 text-left menu-list">
+            <ul>
+              <li v-for="drink in drinkList" :key="drink.id">{{drink.name}}</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -106,6 +108,10 @@ export default {
           this.isShowLoading = false;
           this.foodList = res.data.foodList;
           this.drinkList = res.data.drinkList;
+          setTimeout(() => {
+            // ガチャ結果セクションにジャンプ
+            window.location.href = "#gacha-result";
+          }, 0);
         });
       event.target.blur();
     }
@@ -149,7 +155,9 @@ div.gacha-container {
 div.gacha-result {
   font-weight: 600;
   h2 {
-    padding: 0.5em 0;
+    font-weight: 600;
+    color: #ae1e24;
+    padding: 0.6em 0 0.4em 0;
   }
   div.menu-list {
     li {
